@@ -1,80 +1,591 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coffee Shop</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-        header {
-            background: #6f4e37;
-            color: white;
-            padding: 20px;
-        }
-        nav a {
-            margin: 0 15px;
-            color: white;
-            text-decoration: none;
-        }
-        .hero {
-            background: url('coffee.jpg') no-repeat center center/cover;
-            color: white;
-            padding: 100px 20px;
-            font-size: 24px;
-        }
-        .menu, .about, .gallery, .contact {
-            padding: 50px 20px;
-        }
-        .footer {
-            background: #333;
-            color: white;
-            padding: 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brew Haven Coffee Shop</title>
+  <style>
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    :root {
+      --primary: #5c3d2e;
+      --secondary: #b85c38;
+      --accent: #e0c097;
+      --light: #f5f5f5;
+      --dark: #2c1810;
+    }
+
+    body {
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    h1, h2, h3 {
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    p {
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: var(--secondary);
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--primary);
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 20px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 30px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      background-color: var(--dark);
+      color: white;
+      padding: 180px 0 100px;
+      text-align: center;
+      background-image: linear-gradient(rgba(44, 24, 16, 0.8), rgba(44, 24, 16, 0.8));
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    /* Featured Products */
+    .products {
+      background-color: white;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .product-card {
+      background-color: var(--light);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .product-img {
+      height: 250px;
+      background-color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark);
+      font-weight: bold;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-info h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      color: var(--secondary);
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    /* About Section */
+    .about {
+      background-color: var(--light);
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-img {
+      height: 400px;
+      background-color: var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark);
+      font-weight: bold;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      background-color: white;
+      text-align: center;
+    }
+
+    .testimonial-slider {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .testimonial {
+      padding: 20px;
+      display: none;
+    }
+
+    .testimonial.active {
+      display: block;
+      animation: fadeIn 1s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .testimonial p {
+      font-size: 1.1rem;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-author {
+      font-weight: 700;
+      color: var(--secondary);
+    }
+
+    .slider-controls {
+      margin-top: 20px;
+    }
+
+    .slider-dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    .slider-dot.active {
+      background-color: var(--secondary);
+    }
+
+    /* Contact Section */
+    .contact {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 4px;
+    }
+
+    .contact-form textarea {
+      height: 150px;
+    }
+
+    .contact-info p {
+      margin-bottom: 20px;
+    }
+
+    .contact-info i {
+      margin-right: 10px;
+      color: var(--accent);
+    }
+
+    .social-links {
+      margin-top: 30px;
+    }
+
+    .social-links a {
+      display: inline-block;
+      margin-right: 15px;
+      color: white;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Map */
+    .map {
+      height: 300px;
+      background-color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark);
+      font-weight: bold;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    /* Media Queries */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--primary);
+        padding: 20px;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links li {
+        margin: 10px 0;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .about-content,
+      .contact-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Coffee Delight</h1>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#menu">Menu</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">Brew Haven</div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#products">Menu</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+          <div>☰</div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <h1>Artisan Coffee Experience</h1>
+      <p>Discover the perfect blend of flavor, atmosphere, and community at Brew Haven Coffee Shop. Ethically sourced beans, expertly crafted drinks.</p>
+      <a href="#products" class="btn">Explore Our Menu</a>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section id="products" class="products">
+    <div class="container">
+      <h2>Our Signature Brews</h2>
+      <p>From carefully selected beans to expert preparation, every cup tells a story.</p>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-img">
+            <img src="/api/placeholder/400/320" alt="Coffee Image Placeholder" />
+          </div>
+          <div class="product-info">
+            <h3>Ethiopian Yirgacheffe</h3>
+            <div class="price">$4.50</div>
+            <p>Bright and fruity with notes of berries and citrus. Our most popular single-origin offering.</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">
+            <img src="/api/placeholder/400/320" alt="Coffee Image Placeholder" />
+          </div>
+          <div class="product-info">
+            <h3>House Blend Espresso</h3>
+            <div class="price">$3.75</div>
+            <p>Rich and balanced with notes of chocolate and caramel. Perfect for espresso-based drinks.</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">
+            <img src="/api/placeholder/400/320" alt="Coffee Image Placeholder" />
+          </div>
+          <div class="product-info">
+            <h3>Maple Cinnamon Latte</h3>
+            <div class="price">$5.25</div>
+            <p>Our seasonal special: espresso with steamed milk, pure maple syrup, and a hint of cinnamon.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-img">
+          <img src="/api/placeholder/400/320" alt="Coffee Shop Interior" />
+        </div>
+        <div>
+          <h2>Our Story</h2>
+          <p>Brew Haven was founded in 2018 with a simple mission: to create a warm, welcoming space where coffee lovers could enjoy exceptional drinks made with care and expertise.</p>
+          <p>We source our beans directly from small-scale farmers around the world, ensuring fair compensation and sustainable growing practices. Each batch is roasted in-house to bring out the unique character of every variety.</p>
+          <p>Beyond great coffee, we're committed to fostering community. Our shop hosts regular events, from cupping sessions to local artist showcases, creating a space where connections are made over the perfect cup.</p>
+          <a href="#contact" class="btn">Visit Us Today</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <h2>What Our Customers Say</h2>
+      <div class="testimonial-slider">
+        <div class="testimonial active">
+          <p>"Brew Haven has the best coffee in town, hands down. The staff is incredibly knowledgeable and the atmosphere is perfect for both work and socializing."</p>
+          <div class="testimonial-author">- Sarah M.</div>
+        </div>
+        <div class="testimonial">
+          <p>"I've been coming here for my morning coffee for two years now. The quality is consistently excellent, and they remember my order every time!"</p>
+          <div class="testimonial-author">- David L.</div>
+        </div>
+        <div class="testimonial">
+          <p>"Their seasonal specials are always creative and delicious. The maple cinnamon latte is worth breaking any diet for!"</p>
+          <div class="testimonial-author">- Emma K.</div>
+        </div>
+        <div class="slider-controls">
+          <span class="slider-dot active" data-index="0"></span>
+          <span class="slider-dot" data-index="1"></span>
+          <span class="slider-dot" data-index="2"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2>Get In Touch</h2>
+      <div class="contact-content">
+        <div class="contact-form">
+          <form id="contactForm">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn">Send Message</button>
+          </form>
+        </div>
+        <div class="contact-info">
+          <h3>Visit Our Coffee Shop</h3>
+          <p><i>📍</i> 123 Coffee Street, Brewtown, CA 90210</p>
+          <p><i>📞</i> (555) 123-4567</p>
+          <p><i>✉️</i> hello@brewhaven.com</p>
+          <h3>Opening Hours</h3>
+          <p>Monday - Friday: 7:00 AM - 8:00 PM</p>
+          <p>Saturday - Sunday: 8:00 AM - 9:00 PM</p>
+          <div class="social-links">
+            <a href="#"><i>📱</i></a>
+            <a href="#"><i>📸</i></a>
+            <a href="#"><i>🐦</i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map -->
+  <div class="map">
+    <img src="/api/placeholder/1200/300" alt="Map Location Placeholder" />
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Brew Haven Coffee Shop. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile Navigation Toggle
+    document.getElementById('hamburger').addEventListener('click', function() {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+
+    // Smooth Scrolling for Navigation Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 70,
+            behavior: 'smooth'
+          });
+        }
+        
+        // Close mobile menu if open
+        document.querySelector('.nav-links').classList.remove('active');
+      });
+    });
+
+    // Testimonial Slider
+    const testimonials = document.querySelectorAll('.testimonial');
+    const dots = document.querySelectorAll('.slider-dot');
     
-    <section class="hero">
-        <h2>Freshly Brewed, Just for You</h2>
-        <p>Enjoy the best coffee in town</p>
-    </section>
+    dots.forEach(dot => {
+      dot.addEventListener('click', function() {
+        const index = this.getAttribute('data-index');
+        
+        // Hide all testimonials and deactivate all dots
+        testimonials.forEach(item => item.classList.remove('active'));
+        dots.forEach(item => item.classList.remove('active'));
+        
+        // Show selected testimonial and activate corresponding dot
+        testimonials[index].classList.add('active');
+        this.classList.add('active');
+      });
+    });
     
-    <section id="about" class="about">
-        <h2>About Us</h2>
-        <p>We are passionate about serving high-quality coffee and fresh pastries.</p>
-    </section>
-    
-    <section id="menu" class="menu">
-        <h2>Our Menu</h2>
-        <p>Espresso, Latte, Cappuccino, Pastries, and more...</p>
-    </section>
-    
-    <section id="gallery" class="gallery">
-        <h2>Gallery</h2>
-        <p>Take a look at our cozy ambiance and delicious offerings.</p>
-    </section>
-    
-    <section id="contact" class="contact">
-        <h2>Contact Us</h2>
-        <p>123 Coffee Street, Brewtown | Phone: (123) 456-7890</p>
-    </section>
-    
-    <footer class="footer">
-        <p>&copy; 2025 Coffee Delight. All rights reserved.</p>
-    </footer>
+    // Auto-rotate testimonials
+    let currentIndex = 0;
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % testimonials.length;
+      
+      // Hide all testimonials and deactivate all dots
+      testimonials.forEach(item => item.classList.remove('active'));
+      dots.forEach(item => item.classList.remove('active'));
+      
+      // Show current testimonial and activate corresponding dot
+      testimonials[currentIndex].classList.add('active');
+      dots[currentIndex].classList.add('active');
+    }, 5000);
+
+    // Form Submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you for your message! We will get back to you soon.');
+      this.reset();
+    });
+  </script>
 </body>
 </html>
