@@ -163,6 +163,13 @@
       justify-content: center;
       color: var(--dark);
       font-weight: bold;
+      overflow: hidden;
+    }
+
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .product-info {
@@ -202,6 +209,13 @@
       justify-content: center;
       color: var(--dark);
       font-weight: bold;
+      overflow: hidden;
+    }
+
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     /* Testimonials */
@@ -320,6 +334,13 @@
       justify-content: center;
       color: var(--dark);
       font-weight: bold;
+      overflow: hidden;
+    }
+
+    .map img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     /* Footer */
@@ -389,7 +410,6 @@
   <section id="home" class="hero">
     <div class="container">
       <h1>Artisan Coffee Experience</h1>
-      <img src="/images/Snack bar/Coffee/solo1.png" alt="Coffees">
       <p>Discover the perfect blend of flavor, atmosphere, and community at Brew Haven Coffee Shop. Ethically sourced beans, expertly crafted drinks.</p>
       <a href="#products" class="btn">Explore Our Menu</a>
     </div>
@@ -399,11 +419,14 @@
   <section id="products" class="products">
     <div class="container">
       <h2>Our Signature Brews</h2>
-      <p>From carefully selected beans to expert preparation, every cup tells a story of a logo.</p>
+      <p>From carefully selected beans to expert preparation, every cup tells a story.</p>
       <div class="products-grid">
         <div class="product-card">
           <div class="product-img">
-            <img src="/images/logo1.png" alt="Coffee Image logo" />
+            <!-- Placeholder image with descriptive text fallback -->
+            <div style="background-color: #e0c097; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px;">
+              <img src="/images/Snack bar/Coffee/solo1.png" alt="Coffees">
+            </div>
           </div>
           <div class="product-info">
             <h3>Ethiopian Yirgacheffe</h3>
@@ -413,7 +436,10 @@
         </div>
         <div class="product-card">
           <div class="product-img">
-            <img src="/images/Snack bar/Coffee/solo1.png" alt="Coffee Image Placeholder" />
+            <!-- Placeholder image with descriptive text fallback -->
+            <div style="background-color: #e0c097; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px;">
+              Coffee Image Placeholder<br>House Blend Espresso
+            </div>
           </div>
           <div class="product-info">
             <h3>House Blend Espresso</h3>
@@ -423,7 +449,10 @@
         </div>
         <div class="product-card">
           <div class="product-img">
-            <img src="/images/Snack bar/Coffee/solo1.png" alt="Coffee Image Placeholder" />
+            <!-- Placeholder image with descriptive text fallback -->
+            <div style="background-color: #e0c097; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px;">
+              Coffee Image Placeholder<br>Maple Cinnamon Latte
+            </div>
           </div>
           <div class="product-info">
             <h3>Maple Cinnamon Latte</h3>
@@ -440,7 +469,10 @@
     <div class="container">
       <div class="about-content">
         <div class="about-img">
-          <img src="/images/Models/children_chocolate1.png" alt="Coffee Shop Interior" />
+          <!-- Placeholder image with descriptive text fallback -->
+          <div style="background-color: #e0c097; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px;">
+            Coffee Shop Interior Placeholder
+          </div>
         </div>
         <div>
           <h2>Our Story</h2>
@@ -512,7 +544,10 @@
 
   <!-- Map -->
   <div class="map">
-    <img src="/api/placeholder/1200/300" alt="Map Location Placeholder" />
+    <!-- Placeholder map with descriptive text fallback -->
+    <div style="background-color: #e0c097; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px;">
+      Map Location Placeholder<br>123 Coffee Street, Brewtown, CA 90210
+    </div>
   </div>
 
   <!-- Footer -->
